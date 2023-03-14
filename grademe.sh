@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# Vector 
+# Vector
 
 c++ -Wall -Werror -Wextra -std=c++98 vector/assign.cpp -o std_assign
 c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft vector/assign.cpp -o ft_assign 2> error.txt
@@ -32,6 +32,15 @@ c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft vector/front.cpp -o ft_fron
 c++ -Wall -Werror -Wextra -std=c++98 vector/insert.cpp -o std_insert
 c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft vector/insert.cpp -o ft_insert 2> error.txt
 
+c++ -Wall -Werror -Wextra -std=c++98 vector/max_size.cpp -o std_max_size
+c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft vector/max_size.cpp -o ft_max_size 2> error.txt
+
+c++ -Wall -Werror -Wextra -std=c++98 vector/elem_.cpp -o std_elem_
+c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft vector/elem_.cpp -o ft_elem_ 2> error.txt
+
+c++ -Wall -Werror -Wextra -std=c++98 vector/pop_back.cpp -o std_pop_back
+c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft vector/pop_back.cpp -o ft_pop_back 2> error.txt
+
 
 if [ -s error.txt ]; then
 	printf "Compilation error detected!"
@@ -52,7 +61,7 @@ fttimediff=$(./ft_assign | grep "time" | awk '{printf $3}')
 
 
 if [ "$std" = "$ft" ]; then
-	printf "assign : [\x1B[32m ✔️ \x1B[0m] "
+	printf "assign :   [\x1B[32m ✔️ \x1B[0m] "
 	printf "\t|  time diff : "
 	printf " ft "
 	printf "\x1B[32m$fttimediff\x1B[0m "
@@ -60,7 +69,7 @@ if [ "$std" = "$ft" ]; then
 	printf "\x1B[35m$stdtimediff\x1B[0m\n"
 else
 	diff <(echo "$std") <(echo "$ft")
-	printf "assign : [\x1B[31m KO \x1B[0m]\n"
+	printf "assign :   [\x1B[31m KO \x1B[0m]\n"
 fi
 
 rm -rf ft_assign
@@ -75,7 +84,7 @@ fttimediff=$(./ft_at | grep "time" | awk '{printf $3}')
 
 
 if [ "$std" = "$ft" ]; then
-	printf "at :     [\x1B[32m ✔️ \x1B[0m] "
+	printf "at :       [\x1B[32m ✔️ \x1B[0m] "
 	printf "\t|  time diff : "
 	printf " ft "
 	printf "\x1B[32m$fttimediff\x1B[0m "
@@ -83,7 +92,7 @@ if [ "$std" = "$ft" ]; then
 	printf "\x1B[35m$stdtimediff\x1B[0m\n"
 else
 	diff <(echo "$std") <(echo "$ft")
-	printf "at : [\x1B[31m KO \x1B[0m]\n"
+	printf "at :   [\x1B[31m KO \x1B[0m]\n"
 fi
 
 rm -rf ft_at
@@ -97,7 +106,7 @@ sleep 1
 fttimediff=$(./ft_back | grep "time" | awk '{printf $3}')
 
 if [ "$std" = "$ft" ]; then
-	printf "back :   [\x1B[32m ✔️ \x1B[0m] "
+	printf "back :     [\x1B[32m ✔️ \x1B[0m] "
 	printf "\t|  time diff : "
 	printf " ft "
 	printf "\x1B[32m$fttimediff\x1B[0m "
@@ -105,7 +114,7 @@ if [ "$std" = "$ft" ]; then
 	printf "\x1B[35m$stdtimediff\x1B[0m\n"
 else
 	diff <(echo "$std") <(echo "$ft")
-	printf "back : [\x1B[31m KO \x1B[0m]\n"
+	printf "back :   [\x1B[31m KO \x1B[0m]\n"
 fi
 
 rm -rf ft_back
@@ -119,7 +128,7 @@ sleep 1
 fttimediff=$(./ft_begin | grep "time" | awk '{printf $3}')
 
 if [ "$std" = "$ft" ]; then
-	printf "begin :  [\x1B[32m ✔️ \x1B[0m] "
+	printf "begin :    [\x1B[32m ✔️ \x1B[0m] "
 	printf "\t|  time diff : "
 	printf " ft "
 	printf "\x1B[32m$fttimediff\x1B[0m "
@@ -127,7 +136,7 @@ if [ "$std" = "$ft" ]; then
 	printf "\x1B[35m$stdtimediff\x1B[0m\n"
 else
 	diff <(echo "$std") <(echo "$ft")
-	printf "begin : [\x1B[31m KO \x1B[0m]\n"
+	printf "begin :   [\x1B[31m KO \x1B[0m]\n"
 fi
 
 rm -rf ft_begin
@@ -141,7 +150,7 @@ sleep 1
 fttimediff=$(./ft_clear | grep "time" | awk '{printf $3}')
 
 if [ "$std" = "$ft" ]; then
-	printf "clear :  [\x1B[32m ✔️ \x1B[0m] "
+	printf "clear :    [\x1B[32m ✔️ \x1B[0m] "
 	printf "\t|  time diff : "
 	printf " ft "
 	printf "\x1B[32m$fttimediff\x1B[0m "
@@ -149,7 +158,7 @@ if [ "$std" = "$ft" ]; then
 	printf "\x1B[35m$stdtimediff\x1B[0m\n"
 else
 	diff <(echo "$std") <(echo "$ft")
-	printf "clear : [\x1B[31m KO \x1B[0m]\n"
+	printf "clear :   [\x1B[31m KO \x1B[0m]\n"
 fi
 
 rm -rf ft_clear
@@ -163,7 +172,7 @@ sleep 1
 fttimediff=$(./ft_empty | grep "time" | awk '{printf $3}')
 
 if [ "$std" = "$ft" ]; then
-	printf "empty :  [\x1B[32m ✔️ \x1B[0m] "
+	printf "empty :    [\x1B[32m ✔️ \x1B[0m] "
 	printf "\t|  time diff : "
 	printf " ft "
 	printf "\x1B[32m$fttimediff\x1B[0m "
@@ -171,7 +180,7 @@ if [ "$std" = "$ft" ]; then
 	printf "\x1B[35m$stdtimediff\x1B[0m\n"
 else
 	diff <(echo "$std") <(echo "$ft")
-	printf "empty : [\x1B[31m KO \x1B[0m]\n"
+	printf "empty :   [\x1B[31m KO \x1B[0m]\n"
 fi
 
 rm -rf ft_empty
@@ -185,7 +194,7 @@ sleep 1
 fttimediff=$(./ft_end | grep "time" | awk '{printf $3}')
 
 if [ "$std" = "$ft" ]; then
-	printf "end :    [\x1B[32m ✔️ \x1B[0m] "
+	printf "end :      [\x1B[32m ✔️ \x1B[0m] "
 	printf "\t|  time diff : "
 	printf " ft "
 	printf "\x1B[32m$fttimediff\x1B[0m "
@@ -193,7 +202,7 @@ if [ "$std" = "$ft" ]; then
 	printf "\x1B[35m$stdtimediff\x1B[0m\n"
 else
 	diff <(echo "$std") <(echo "$ft")
-	printf "end : [\x1B[31m KO \x1B[0m]\n"
+	printf "end :   [\x1B[31m KO \x1B[0m]\n"
 fi
 
 rm -rf ft_end
@@ -207,7 +216,7 @@ sleep 1
 fttimediff=$(./ft_erase | grep "time" | awk '{printf $3}')
 
 if [ "$std" = "$ft" ]; then
-	printf "erase :  [\x1B[32m ✔️ \x1B[0m] "
+	printf "erase :    [\x1B[32m ✔️ \x1B[0m] "
 	printf "\t|  time diff : "
 	printf " ft "
 	printf "\x1B[32m$fttimediff\x1B[0m "
@@ -215,7 +224,7 @@ if [ "$std" = "$ft" ]; then
 	printf "\x1B[35m$stdtimediff\x1B[0m\n"
 else
 	diff <(echo "$std") <(echo "$ft")
-	printf "erase : [\x1B[31m KO \x1B[0m]\n"
+	printf "erase :   [\x1B[31m KO \x1B[0m]\n"
 fi
 
 rm -rf ft_erase
@@ -229,7 +238,7 @@ sleep 1
 fttimediff=$(./ft_front | grep "time" | awk '{printf $3}')
 
 if [ "$std" = "$ft" ]; then
-	printf "front :  [\x1B[32m ✔️ \x1B[0m] "
+	printf "front :    [\x1B[32m ✔️ \x1B[0m] "
 	printf "\t|  time diff : "
 	printf " ft "
 	printf "\x1B[32m$fttimediff\x1B[0m "
@@ -237,7 +246,7 @@ if [ "$std" = "$ft" ]; then
 	printf "\x1B[35m$stdtimediff\x1B[0m\n"
 else
 	diff <(echo "$std") <(echo "$ft")
-	printf "front : [\x1B[31m KO \x1B[0m]\n"
+	printf "front :   [\x1B[31m KO \x1B[0m]\n"
 fi
 
 rm -rf ft_front
@@ -251,7 +260,7 @@ sleep 1
 fttimediff=$(./ft_insert | grep "time" | awk '{printf $3}')
 
 if [ "$std" = "$ft" ]; then
-	printf "insert : [\x1B[32m ✔️ \x1B[0m] "
+	printf "insert :   [\x1B[32m ✔️ \x1B[0m] "
 	printf "\t|  time diff : "
 	printf " ft "
 	printf "\x1B[32m$fttimediff\x1B[0m "
@@ -259,8 +268,86 @@ if [ "$std" = "$ft" ]; then
 	printf "\x1B[35m$stdtimediff\x1B[0m\n"
 else
 	diff <(echo "$std") <(echo "$ft")
-	printf "insert : [\x1B[31m KO \x1B[0m]\n"
+	printf "insert :   [\x1B[31m KO \x1B[0m]\n"
 fi
 
 rm -rf ft_insert
 rm -rf std_insert
+
+std=$(./std_max_size | grep -v "time" | grep -v "NAMESPACE")
+ft=$(./ft_max_size | grep -v "time" | grep -v "NAMESPACE")
+sleep 1
+stdtimediff=$(./std_max_size | grep "time" | awk '{printf $3}')
+sleep 1
+fttimediff=$(./ft_max_size | grep "time" | awk '{printf $3}')
+
+if [ "$std" = "$ft" ]; then
+	printf "max_size : [\x1B[32m ✔️ \x1B[0m] "
+	printf "\t|  time diff : "
+	printf " ft "
+	printf "\x1B[32m$fttimediff\x1B[0m "
+	printf " std "
+	printf "\x1B[35m$stdtimediff\x1B[0m\n"
+else
+	diff <(echo "$std") <(echo "$ft")
+	printf "max_size : [\x1B[31m KO \x1B[0m]\n"
+fi
+
+rm -rf ft_max_size
+rm -rf std_max_size
+
+std=$(./std_elem_ | grep -v "time" | grep -v "NAMESPACE")
+ft=$(./ft_elem_ | grep -v "time" | grep -v "NAMESPACE")
+sleep 1
+stdtimediff=$(./std_elem_ | grep "time" | awk '{printf $3}')
+sleep 1
+fttimediff=$(./ft_elem_ | grep "time" | awk '{printf $3}')
+
+if [ "$std" = "$ft" ]; then
+	printf "oper[] :   [\x1B[32m ✔️ \x1B[0m] "
+	printf "\t|  time diff : "
+	printf " ft "
+	printf "\x1B[32m$fttimediff\x1B[0m "
+	printf " std "
+	printf "\x1B[35m$stdtimediff\x1B[0m\n"
+else
+	diff <(echo "$std") <(echo "$ft")
+	printf "elem_ : [\x1B[31m KO \x1B[0m]\n"
+fi
+
+rm -rf ft_elem_
+rm -rf std_elem_
+
+std=$(./std_pop_back | grep -v "time" | grep -v "NAMESPACE")
+ft=$(./ft_pop_back | grep -v "time" | grep -v "NAMESPACE")
+sleep 1
+stdtimediff=$(./std_pop_back | grep "time" | awk '{printf $3}')
+sleep 1
+fttimediff=$(./ft_pop_back | grep "time" | awk '{printf $3}')
+
+if [ "$std" = "$ft" ]; then
+	printf "pop_back : [\x1B[32m ✔️ \x1B[0m] "
+	printf "\t|  time diff : "
+	printf " ft "
+	printf "\x1B[32m$fttimediff\x1B[0m "
+	printf " std "
+	printf "\x1B[35m$stdtimediff\x1B[0m\n"
+else
+	diff <(echo "$std") <(echo "$ft")
+	printf "pop_back : [\x1B[31m KO \x1B[0m]\n"
+fi
+
+rm -rf ft_pop_back
+rm -rf std_pop_back
+
+# (vector)
+# 		more insert tests
+# 		operator=
+# 		pop_back()
+# 		push_back()
+# 		rbegin()
+# 		rend()
+# 		reserve()
+# 		resize()
+# 		swap()
+# 		Non members
