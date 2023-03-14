@@ -6,7 +6,7 @@
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 23:19:50 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/14 00:10:38 by wismith          ###   ########.fr       */
+/*   Updated: 2023/03/15 02:54:19 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,12 @@ void	range_insert_int(NAMESPACE::vector<int> test)
 	test.insert(test.begin(), sample.begin() + 10, sample.begin() + 12);
 	print_size(test);
 	test.insert(test.begin(), sample.begin() + 10, sample.begin() + 10);
+	print_size(test);
+
+	std::list<int>	list;
+	list.assign(4, 5);
+	std::list<int>::iterator	it;
+
+	test.insert(test.end(), list.begin(), list.end());
 	print_size(test);
 }
