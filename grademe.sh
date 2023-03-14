@@ -41,6 +41,9 @@ c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft vector/elem_.cpp -o ft_elem
 c++ -Wall -Werror -Wextra -std=c++98 vector/pop_back.cpp -o std_pop_back
 c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft vector/pop_back.cpp -o ft_pop_back 2> error.txt
 
+c++ -Wall -Werror -Wextra -std=c++98 vector/push_back.cpp -o std_push_back
+c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft vector/push_back.cpp -o ft_push_back 2> error.txt
+
 
 if [ -s error.txt ]; then
 	printf "Compilation error detected!"
@@ -340,10 +343,31 @@ fi
 rm -rf ft_pop_back
 rm -rf std_pop_back
 
+std=$(./std_push_back | grep -v "time" | grep -v "NAMESPACE")
+ft=$(./ft_push_back | grep -v "time" | grep -v "NAMESPACE")
+sleep 1
+stdtimediff=$(./std_push_back | grep "time" | awk '{printf $3}')
+sleep 1
+fttimediff=$(./ft_push_back | grep "time" | awk '{printf $3}')
+
+if [ "$std" = "$ft" ]; then
+	printf "push_back :[\x1B[32m ✔️ \x1B[0m] "
+	printf "\t|  time diff : "
+	printf " ft "
+	printf "\x1B[32m$fttimediff\x1B[0m "
+	printf " std "
+	printf "\x1B[35m$stdtimediff\x1B[0m\n"
+else
+	diff <(echo "$std") <(echo "$ft")
+	printf "push_back :[\x1B[31m KO \x1B[0m]\n"
+fi
+
+rm -rf ft_push_back
+rm -rf std_push_back
+
 # (vector)
 # 		more insert tests
 # 		operator=
-# 		pop_back()
 # 		push_back()
 # 		rbegin()
 # 		rend()
