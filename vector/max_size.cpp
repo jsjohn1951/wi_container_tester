@@ -6,7 +6,7 @@
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:15:19 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/14 15:48:01 by wismith          ###   ########.fr       */
+/*   Updated: 2023/03/15 17:09:54 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ int	main(void)
 	}
 	{
 		NAMESPACE::vector<std::string>	vec;
+		std::cout << "max_size : " << vec.max_size() << " std::string" <<std::endl;
+	}
+	{
+		NAMESPACE::vector<std::vector<int> >	vec;
+		std::cout << "max_size : " << vec.max_size() << " std::string" <<std::endl;
+	}
+	{
+		NAMESPACE::vector<std::vector<std::vector<std::list<int> > > >	vec;
 		std::cout << "max_size : " << vec.max_size() << " std::string" <<std::endl;
 	}
 	gettimeofday(&exec_time, NULL);
