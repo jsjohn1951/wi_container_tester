@@ -6,7 +6,7 @@
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 23:37:24 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/22 15:03:22 by wismith          ###   ########.fr       */
+/*   Updated: 2023/03/22 19:33:58 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,19 @@ void	print_map(NAMESPACE::map<T1, T2> &map)
 	typename NAMESPACE::map<T1, T2>::iterator	it = map.begin();
 	for (; it != map.end(); it++)
 		std::cout << "first: " << it->first << "\tsecond: " << it->second << std::endl;
+}
+
+template <class V1, class V2>
+void	test_equal_range(const V1 &key, NAMESPACE::map<V1, V2> &map)
+{
+	NAMESPACE::pair<typename NAMESPACE::map<V1, V2>::iterator,
+			typename NAMESPACE::map<V1, V2>::iterator>	p = map.equal_range(key);
+		std::cout << "first = end? " << (p.first == map.end()) << std::endl;
+		std::cout << "second = end? " << (p.second == map.end()) << std::endl;
+
+		if (!((p.first == map.end()) || (p.second == map.end())))
+			for (typename NAMESPACE::map<V1, V2>::iterator it = p.first; it != p.second; it++)
+				std::cout << "first : " << it->first << " second: " << it->second << std::endl;
 }
 
 #endif
