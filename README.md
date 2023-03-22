@@ -1,6 +1,8 @@
 # FT_container tester
 ## wi_container_tester
 
+![](https://github.com/jsjohn1951/wi_container_tester/tree/main/graphics/visual_of_.gif)
+
 wi_container_tester is a tester specifically designed to test your ft_container project. The code within the directories can also be analysed to understand how containers (vector, map, stack(container adaptor) ) can be used.
 
 The grademe.sh bash scripts will generate both the ft:: containers and std:: containers in separate executables before comparing the outputs against each other. 
