@@ -6,15 +6,17 @@
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:58:34 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/15 19:45:14 by wismith          ###   ########.fr       */
+/*   Updated: 2023/03/22 15:04:04 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #	ifndef VECTORTEST_HPP
 # define VECTORTEST_HPP
 
+# include "../config.hpp"
+
 #	ifndef VECHEAD
-# define VECHEAD "../../vector/vector.hpp"
+# define VECHEAD VECTORHPP
 #endif
 
 #include VECHEAD

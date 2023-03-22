@@ -6,19 +6,22 @@
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 23:37:24 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/22 00:49:23 by wismith          ###   ########.fr       */
+/*   Updated: 2023/03/22 15:03:22 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #	ifndef MAPTEST_HPP
 # define MAPTEST_HPP
 
+# include "../config.hpp"
+
 #	ifndef MAPHEAD
-# define MAPHEAD "../../map/map.hpp"
+# define MAPHEAD MAPHPP
 #endif
 
 #include MAPHEAD
 #include <map>
+#include <vector>
 #include <list>
 #include <iostream>
 #include <limits>
@@ -51,6 +54,12 @@ void	map_elem_insert_int(NAMESPACE::map<int, int> &map)
 {
 	for (int i = 0; i < 20; i++)
 		map[i] = (i * 5) / 2;
+}
+
+void	map_elem_insert_string(NAMESPACE::map<int, std::string> &map)
+{
+	for (int i = 0; i < 20; i++)
+		map[i] = "42 is awesome!";
 }
 
 template <class T1, class T2>
