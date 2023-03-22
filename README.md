@@ -1,7 +1,7 @@
 # FT_container tester
 ## wi_container_tester
 
-![](https://github.com/jsjohn1951/wi_container_tester/tree/main/graphics/visual_of_.gif)
+![](https://github.com/jsjohn1951/wi_container_tester/blob/main/graphics/visual_of_.gif)
 
 wi_container_tester is a tester specifically designed to test your ft_container project. The code within the directories can also be analysed to understand how containers (vector, map, stack(container adaptor) ) can be used.
 
