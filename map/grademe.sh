@@ -42,6 +42,12 @@ c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft map/erase.cpp -o ft_erase 2
 printf " . "
 c++ -Wall -Werror -Wextra -std=c++98 map/find.cpp -o std_find
 c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft map/find.cpp -o ft_find 2>> MError.txt
+printf " . "
+c++ -Wall -Werror -Wextra -std=c++98 map/get_allocator.cpp -o std_get_allocator
+c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft map/get_allocator.cpp -o ft_get_allocator 2>> MError.txt
+printf " . "
+c++ -Wall -Werror -Wextra -std=c++98 map/insert.cpp -o std_insert
+c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft map/insert.cpp -o ft_insert 2>> MError.txt
 
 printf " . done"
 
@@ -298,6 +304,62 @@ fi
 
 rm -rf ft_find
 rm -rf std_find
+
+if [ -f ./ft_get_allocator ]; then
+	std=$(./std_get_allocator | grep -v "time" | grep -v "NAMESPACE")
+	ft=$(./ft_get_allocator | grep -v "time" | grep -v "NAMESPACE")
+	sleep 1
+	stdtimediff=$(./std_get_allocator | grep "time" | awk '{printf $3}')
+	sleep 1
+	fttimediff=$(./ft_get_allocator | grep "time" | awk '{printf $3}')
+fi
+
+if [ -f ./ft_get_allocator -a "$std" = "$ft" ]; then
+	printf "get_allocator:[\x1B[32m ✔️ \x1B[0m] "
+	printf "\t|  time diff : "
+	printf " ft "
+	printf "\x1B[32m$fttimediff\x1B[0m "
+	printf " std "
+	printf "\x1B[35m$stdtimediff\x1B[0m\n"
+else
+	if [ -f ./ft_get_allocator ]; then
+		diff <(echo "$std") <(echo "$ft")
+	else
+		printf "Compilation Error! Check VError.txt\n"
+	fi
+	printf "get_allocator:[\x1B[31m KO \x1B[0m]\n"
+fi
+
+rm -rf ft_get_allocator
+rm -rf std_get_allocator
+
+if [ -f ./ft_insert ]; then
+	std=$(./std_insert | grep -v "time" | grep -v "NAMESPACE")
+	ft=$(./ft_insert | grep -v "time" | grep -v "NAMESPACE")
+	sleep 1
+	stdtimediff=$(./std_insert | grep "time" | awk '{printf $3}')
+	sleep 1
+	fttimediff=$(./ft_insert | grep "time" | awk '{printf $3}')
+fi
+
+if [ -f ./ft_insert -a "$std" = "$ft" ]; then
+	printf "insert:       [\x1B[32m ✔️ \x1B[0m] "
+	printf "\t|  time diff : "
+	printf " ft "
+	printf "\x1B[32m$fttimediff\x1B[0m "
+	printf " std "
+	printf "\x1B[35m$stdtimediff\x1B[0m\n"
+else
+	if [ -f ./ft_insert ]; then
+		diff <(echo "$std") <(echo "$ft")
+	else
+		printf "Compilation Error! Check VError.txt\n"
+	fi
+	printf "insert:       [\x1B[31m KO \x1B[0m]\n"
+fi
+
+rm -rf ft_insert
+rm -rf std_insert
 
 if [ ! -s ./MError.txt ]; then
 	rm -rf ./MError.txt

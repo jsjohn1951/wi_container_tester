@@ -6,7 +6,7 @@
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 23:37:24 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/22 19:33:58 by wismith          ###   ########.fr       */
+/*   Updated: 2023/03/23 15:42:25 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,23 @@ void	test_equal_range(const V1 &key, NAMESPACE::map<V1, V2> &map)
 		if (!((p.first == map.end()) || (p.second == map.end())))
 			for (typename NAMESPACE::map<V1, V2>::iterator it = p.first; it != p.second; it++)
 				std::cout << "first : " << it->first << " second: " << it->second << std::endl;
+}
+
+template <class T1, class T2>
+void	test_allocator(typename NAMESPACE::map<T1, T2>::allocator_type	&alloc)
+{
+	NAMESPACE::pair<const T1, T2>	*ptr = alloc.allocate(1);
+	alloc.construct(ptr, NAMESPACE::pair<T1, T2>());
+	
+	alloc.destroy(ptr);
+	alloc.deallocate(ptr, 1);
+}
+
+template <class T1, class T2>
+void	test_insert_pair(typename NAMESPACE::map<T1, T2>::iterator &iter)
+{
+	std::cout << "Iterator contents:\n";
+	std::cout << "first: " << iter->first << " second: " << iter->second << std::endl;
 }
 
 #endif
