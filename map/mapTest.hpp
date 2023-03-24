@@ -6,7 +6,7 @@
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 23:37:24 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/23 15:42:25 by wismith          ###   ########.fr       */
+/*   Updated: 2023/03/24 17:06:59 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 # include "../config.hpp"
 
-#	ifndef MAPHEAD
+#	ifndef NAMESPACE
+# define MAPHEAD <map>
+# else
 # define MAPHEAD MAPHPP
 #endif
 
-#include MAPHEAD
-#include <map>
+# include MAPHEAD
 #include <vector>
 #include <list>
 #include <iostream>

@@ -48,6 +48,21 @@ c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft map/get_allocator.cpp -o ft
 printf " . "
 c++ -Wall -Werror -Wextra -std=c++98 map/insert.cpp -o std_insert
 c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft map/insert.cpp -o ft_insert 2>> MError.txt
+printf " . "
+c++ -Wall -Werror -Wextra -std=c++98 map/key_comp.cpp -o std_key_comp
+c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft map/key_comp.cpp -o ft_key_comp 2>> MError.txt
+printf " . "
+c++ -Wall -Werror -Wextra -std=c++98 map/lower_bound.cpp -o std_lower_bound
+c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft map/lower_bound.cpp -o ft_lower_bound 2>> MError.txt
+printf " . "
+c++ -Wall -Werror -Wextra -std=c++98 map/elem_.cpp -o std_elem_
+c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft map/elem_.cpp -o ft_elem_ 2>> MError.txt
+printf " . "
+c++ -Wall -Werror -Wextra -std=c++98 map/rbegin.cpp -o std_rbegin
+c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft map/rbegin.cpp -o ft_rbegin 2>> MError.txt
+printf " . "
+c++ -Wall -Werror -Wextra -std=c++98 map/rend.cpp -o std_rend
+c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft map/rend.cpp -o ft_rend 2>> MError.txt
 
 printf " . done"
 
@@ -73,7 +88,7 @@ else
 	if [ -f ./ft_construct ]; then
 		diff <(echo "$std") <(echo "$ft")
 	else
-		printf "Compilation Error! Check VError.txt\n"
+		printf "Compilation Error! Check MError.txt\n"
 	fi
 	printf "construct :   [\x1B[31m KO \x1B[0m]\n"
 fi
@@ -101,7 +116,7 @@ else
 	if [ -f ./ft_begin ]; then
 		diff <(echo "$std") <(echo "$ft")
 	else
-		printf "Compilation Error! Check VError.txt\n"
+		printf "Compilation Error! Check MError.txt\n"
 	fi
 	printf "begin :       [\x1B[31m KO \x1B[0m]\n"
 fi
@@ -129,7 +144,7 @@ else
 	if [ -f ./ft_clear ]; then
 		diff <(echo "$std") <(echo "$ft")
 	else
-		printf "Compilation Error! Check VError.txt\n"
+		printf "Compilation Error! Check MError.txt\n"
 	fi
 	printf "clear :       [\x1B[31m KO \x1B[0m]\n"
 fi
@@ -157,7 +172,7 @@ else
 	if [ -f ./ft_count ]; then
 		diff <(echo "$std") <(echo "$ft")
 	else
-		printf "Compilation Error! Check VError.txt\n"
+		printf "Compilation Error! Check MError.txt\n"
 	fi
 	printf "count :       [\x1B[31m KO \x1B[0m]\n"
 fi
@@ -185,7 +200,7 @@ else
 	if [ -f ./ft_empty ]; then
 		diff <(echo "$std") <(echo "$ft")
 	else
-		printf "Compilation Error! Check VError.txt\n"
+		printf "Compilation Error! Check MError.txt\n"
 	fi
 	printf "empty :       [\x1B[31m KO \x1B[0m]\n"
 fi
@@ -213,7 +228,7 @@ else
 	if [ -f ./ft_end ]; then
 		diff <(echo "$std") <(echo "$ft")
 	else
-		printf "Compilation Error! Check VError.txt\n"
+		printf "Compilation Error! Check MError.txt\n"
 	fi
 	printf "end :         [\x1B[31m KO \x1B[0m]\n"
 fi
@@ -241,7 +256,7 @@ else
 	if [ -f ./ft_equal_range ]; then
 		diff <(echo "$std") <(echo "$ft")
 	else
-		printf "Compilation Error! Check VError.txt\n"
+		printf "Compilation Error! Check MError.txt\n"
 	fi
 	printf "equal_range : [\x1B[31m KO \x1B[0m]\n"
 fi
@@ -269,7 +284,7 @@ else
 	if [ -f ./ft_erase ]; then
 		diff <(echo "$std") <(echo "$ft")
 	else
-		printf "Compilation Error! Check VError.txt\n"
+		printf "Compilation Error! Check MError.txt\n"
 	fi
 	printf "erase :       [\x1B[31m KO \x1B[0m]\n"
 fi
@@ -297,7 +312,7 @@ else
 	if [ -f ./ft_find ]; then
 		diff <(echo "$std") <(echo "$ft")
 	else
-		printf "Compilation Error! Check VError.txt\n"
+		printf "Compilation Error! Check MError.txt\n"
 	fi
 	printf "find :        [\x1B[31m KO \x1B[0m]\n"
 fi
@@ -325,7 +340,7 @@ else
 	if [ -f ./ft_get_allocator ]; then
 		diff <(echo "$std") <(echo "$ft")
 	else
-		printf "Compilation Error! Check VError.txt\n"
+		printf "Compilation Error! Check MError.txt\n"
 	fi
 	printf "get_allocator:[\x1B[31m KO \x1B[0m]\n"
 fi
@@ -353,13 +368,153 @@ else
 	if [ -f ./ft_insert ]; then
 		diff <(echo "$std") <(echo "$ft")
 	else
-		printf "Compilation Error! Check VError.txt\n"
+		printf "Compilation Error! Check MError.txt\n"
 	fi
 	printf "insert:       [\x1B[31m KO \x1B[0m]\n"
 fi
 
 rm -rf ft_insert
 rm -rf std_insert
+
+if [ -f ./ft_key_comp ]; then
+	std=$(./std_key_comp | grep -v "time" | grep -v "NAMESPACE")
+	ft=$(./ft_key_comp | grep -v "time" | grep -v "NAMESPACE")
+	sleep 1
+	stdtimediff=$(./std_key_comp | grep "time" | awk '{printf $3}')
+	sleep 1
+	fttimediff=$(./ft_key_comp | grep "time" | awk '{printf $3}')
+fi
+
+if [ -f ./ft_key_comp -a "$std" = "$ft" ]; then
+	printf "key_comp:     [\x1B[32m ✔️ \x1B[0m] "
+	printf "\t|  time diff : "
+	printf " ft "
+	printf "\x1B[32m$fttimediff\x1B[0m "
+	printf " std "
+	printf "\x1B[35m$stdtimediff\x1B[0m\n"
+else
+	if [ -f ./ft_key_comp ]; then
+		diff <(echo "$std") <(echo "$ft")
+	else
+		printf "Compilation Error! Check MError.txt\n"
+	fi
+	printf "key_comp:     [\x1B[31m KO \x1B[0m]\n"
+fi
+
+rm -rf ft_key_comp
+rm -rf std_key_comp
+
+if [ -f ./ft_lower_bound ]; then
+	std=$(./std_lower_bound | grep -v "time" | grep -v "NAMESPACE")
+	ft=$(./ft_lower_bound | grep -v "time" | grep -v "NAMESPACE")
+	sleep 1
+	stdtimediff=$(./std_lower_bound | grep "time" | awk '{printf $3}')
+	sleep 1
+	fttimediff=$(./ft_lower_bound | grep "time" | awk '{printf $3}')
+fi
+
+if [ -f ./ft_lower_bound -a "$std" = "$ft" ]; then
+	printf "lo/up_bound:  [\x1B[32m ✔️ \x1B[0m] "
+	printf "\t|  time diff : "
+	printf " ft "
+	printf "\x1B[32m$fttimediff\x1B[0m "
+	printf " std "
+	printf "\x1B[35m$stdtimediff\x1B[0m\n"
+else
+	if [ -f ./ft_lower_bound ]; then
+		diff <(echo "$std") <(echo "$ft")
+	else
+		printf "Compilation Error! Check MError.txt\n"
+	fi
+	printf "lo/up_bound:  [\x1B[31m KO \x1B[0m]\n"
+fi
+
+rm -rf ft_lower_bound
+rm -rf std_lower_bound
+
+if [ -f ./ft_elem_ ]; then
+	std=$(./std_elem_ | grep -v "time" | grep -v "NAMESPACE")
+	ft=$(./ft_elem_ | grep -v "time" | grep -v "NAMESPACE")
+	sleep 1
+	stdtimediff=$(./std_elem_ | grep "time" | awk '{printf $3}')
+	sleep 1
+	fttimediff=$(./ft_elem_ | grep "time" | awk '{printf $3}')
+fi
+
+if [ -f ./ft_elem_ -a "$std" = "$ft" ]; then
+	printf "operator[]:   [\x1B[32m ✔️ \x1B[0m] "
+	printf "\t|  time diff : "
+	printf " ft "
+	printf "\x1B[32m$fttimediff\x1B[0m "
+	printf " std "
+	printf "\x1B[35m$stdtimediff\x1B[0m\n"
+else
+	if [ -f ./ft_elem_ ]; then
+		diff <(echo "$std") <(echo "$ft")
+	else
+		printf "Compilation Error! Check MError.txt\n"
+	fi
+	printf "operator[]:   [\x1B[31m KO \x1B[0m]\n"
+fi
+
+rm -rf ft_elem_
+rm -rf std_elem_
+
+if [ -f ./ft_rbegin ]; then
+	std=$(./std_rbegin | grep -v "time" | grep -v "NAMESPACE")
+	ft=$(./ft_rbegin | grep -v "time" | grep -v "NAMESPACE")
+	sleep 1
+	stdtimediff=$(./std_rbegin | grep "time" | awk '{printf $3}')
+	sleep 1
+	fttimediff=$(./ft_rbegin | grep "time" | awk '{printf $3}')
+fi
+
+if [ -f ./ft_rbegin -a "$std" = "$ft" ]; then
+	printf "rbegin:       [\x1B[32m ✔️ \x1B[0m] "
+	printf "\t|  time diff : "
+	printf " ft "
+	printf "\x1B[32m$fttimediff\x1B[0m "
+	printf " std "
+	printf "\x1B[35m$stdtimediff\x1B[0m\n"
+else
+	if [ -f ./ft_rbegin ]; then
+		diff <(echo "$std") <(echo "$ft")
+	else
+		printf "Compilation Error! Check MError.txt\n"
+	fi
+	printf "rbegin:       [\x1B[31m KO \x1B[0m]\n"
+fi
+
+rm -rf ft_rbegin
+rm -rf std_rbegin
+
+if [ -f ./ft_rend ]; then
+	std=$(./std_rend | grep -v "time" | grep -v "NAMESPACE")
+	ft=$(./ft_rend | grep -v "time" | grep -v "NAMESPACE")
+	sleep 1
+	stdtimediff=$(./std_rend | grep "time" | awk '{printf $3}')
+	sleep 1
+	fttimediff=$(./ft_rend | grep "time" | awk '{printf $3}')
+fi
+
+if [ -f ./ft_rend -a "$std" = "$ft" ]; then
+	printf "rend:         [\x1B[32m ✔️ \x1B[0m] "
+	printf "\t|  time diff : "
+	printf " ft "
+	printf "\x1B[32m$fttimediff\x1B[0m "
+	printf " std "
+	printf "\x1B[35m$stdtimediff\x1B[0m\n"
+else
+	if [ -f ./ft_rend ]; then
+		diff <(echo "$std") <(echo "$ft")
+	else
+		printf "Compilation Error! Check MError.txt\n"
+	fi
+	printf "rend:         [\x1B[31m KO \x1B[0m]\n"
+fi
+
+rm -rf ft_rend
+rm -rf std_rend
 
 if [ ! -s ./MError.txt ]; then
 	rm -rf ./MError.txt
