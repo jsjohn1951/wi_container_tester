@@ -16,7 +16,7 @@ printf "\n\x1B[32mCompiling vector tests "
 
 rm -rf VError.txt
 
-array=(vector/assign.cpp vector/at.cpp vector/back.cpp vector/begin.cpp vector/clear.cpp vector/empty.cpp \
+array=(vector/construct.cpp vector/assign.cpp vector/at.cpp vector/back.cpp vector/begin.cpp vector/clear.cpp vector/empty.cpp \
 	vector/erase.cpp vector/front.cpp vector/insert.cpp vector/max_size.cpp vector/elem_.cpp vector/push_back.cpp \
 	vector/iterator.cpp)
 for str in ${array[@]}; do
@@ -82,7 +82,6 @@ fi
 
 # (vector)
 # 		more insert tests
-# 		operator=
 # 		rbegin()
 # 		rend()
 # 		reserve()

@@ -6,7 +6,7 @@
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:07:59 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/13 19:54:10 by wismith          ###   ########.fr       */
+/*   Updated: 2023/03/27 11:42:49 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,6 @@ int	main(void)
 	std::cout << "\n\ntime : ";
 	std::cout << std::fixed << std::setprecision(3) << (end - start) / 1000 << " ms" << std::endl;
 	return (0);
-}
-
-template <class T>
-void	print_vec(NAMESPACE::vector<T> &test)
-{
-	std::cout << "Content :\n";
-	for (long unsigned int i = 0; i < test.size(); i++)
-		std::cout << test[i] << " ";
-	std::cout << std::endl;
-}
-
-template <class T>
-void	print_size(NAMESPACE::vector<T> &test)
-{
-	std::cout << "is empty?\t" << (test.empty() ? "true" : "false") << std::endl;
-	std::cout << "Capacity > 0 ?\t" << (test.capacity() ? "true" : "false") << std::endl;
-	std::cout << "size : " << test.size() << std::endl;
-	print_vec(test);
 }
 
 void	populate_vector(int num, NAMESPACE::vector<int> &test)
