@@ -47,6 +47,13 @@ for str in ${array[@]}; do
 		stdtimediff=$(cat stdcmp.txt | grep -a "time" | awk '{printf $3}')
 		sleep 1
 		fttimediff=$(cat ftcmp.txt | grep -a "time" | awk '{printf $3}')
+		sleep 1
+		type=$(uname)
+		if [ "$type" = "Linux" ]; then
+			valgrind --leak-check=full ./$ft &> leakrep.txt
+			val=$(cat leakrep.txt | grep -a "LEAK SUMMARY" \
+				| awk '{printf $2}' && printf " " && cat leakrep.txt | grep -a "LEAK SUMMARY" | awk '{printf $3}')
+		fi
 	fi
 
 	if [ -f ./$ft -a "$stdcat" = "$ftcat" ]; then
@@ -58,9 +65,20 @@ for str in ${array[@]}; do
 		res=$(./timediff "$fttimediff $stdtimediff")
 		printf " time : "
 		if [ "$res" = "0" ]; then
-			printf "[\x1B[32m ✔️ \x1B[0m]\n"
+			printf "[\x1B[32m ✔️ \x1B[0m]"
 		else
-			printf "[\x1B[31m KO \x1B[0m]\n"
+			printf "[\x1B[31m KO \x1B[0m]"
+		fi
+
+		if [ "$type" = "Linux" ]; then
+			printf "  |  leaks : "
+			if [ "$val" = "LEAK SUMMARY:" ]; then
+				printf "[\x1B[31m KO \x1B[0m]\n"
+			else
+				printf "[\x1B[32m ✔️ \x1B[0m]\n"
+			fi
+		else
+			printf "\n"
 		fi
 	else
 		if [ -f ./$ft ]; then
@@ -81,6 +99,8 @@ done
 if [ ! -s ./VError.txt ]; then
 	rm -rf ./VError.txt
 fi
+
+rm -rf leakrep.txt
 
 rm -rf timediff
 

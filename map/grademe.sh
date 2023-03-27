@@ -46,9 +46,16 @@ for str in ${array[@]}; do
 		stdcat=$(cat stdcmp.txt | grep -v "time" | grep -v "NAMESPACE")
 		ftcat=$(cat ftcmp.txt | grep -v "time" | grep -v "NAMESPACE")
 		sleep 1
-		stdtimediff=$(cat stdcmp.txt | grep "time" | awk '{printf $3}')
+		stdtimediff=$(cat stdcmp.txt | grep -a "time" | awk '{printf $3}')
 		sleep 1
-		fttimediff=$(cat ftcmp.txt | grep "time" | awk '{printf $3}')
+		fttimediff=$(cat ftcmp.txt | grep -a "time" | awk '{printf $3}')
+		sleep 1
+		type=$(uname)
+		if [ "$type" = "Linux" ]; then
+			valgrind --leak-check=full ./$ft &> leakrep.txt
+			val=$(cat leakrep.txt | grep -a "LEAK SUMMARY" \
+				| awk '{printf $2}' && printf " " && cat leakrep.txt | grep -a "LEAK SUMMARY" | awk '{printf $3}')
+		fi
 	fi
 
 	if [ -f ./$ft -a "$stdcat" = "$ftcat" ]; then
@@ -60,9 +67,20 @@ for str in ${array[@]}; do
 		res=$(./timediff "$fttimediff $stdtimediff")
 		printf " time : "
 		if [ "$res" = "0" ]; then
-			printf "[\x1B[32m ✔️ \x1B[0m]\n"
+			printf "[\x1B[32m ✔️ \x1B[0m]"
 		else
-			printf "[\x1B[31m KO \x1B[0m]\n"
+			printf "[\x1B[31m KO \x1B[0m]"
+		fi
+
+		if [ "$type" = "Linux" ]; then
+			printf "  |  leaks : "
+			if [ "$val" = "LEAK SUMMARY:" ]; then
+				printf "[\x1B[31m KO \x1B[0m]\n"
+			else
+				printf "[\x1B[32m ✔️ \x1B[0m]\n"
+			fi
+		else
+			printf "\n"
 		fi
 	else
 		if [ -f ./$ft ]; then
@@ -83,5 +101,7 @@ done
 if [ ! -s ./MError.txt ]; then
 	rm -rf ./MError.txt
 fi
+
+rm -rf leakrep.txt
 
 rm -rf timediff
