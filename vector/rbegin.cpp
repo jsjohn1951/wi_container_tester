@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   begin.cpp                                          :+:      :+:    :+:   */
+/*   rbegin.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 14:52:02 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/27 22:01:02 by wismith          ###   ########.fr       */
+/*   Created: 2023/03/27 21:38:02 by wismith           #+#    #+#             */
+/*   Updated: 2023/03/27 21:59:57 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vectorTest.hpp"
 
-void	begin_test(NAMESPACE::vector<int> test);
-void	begin_string_test(NAMESPACE::vector<std::string> test);
-void	end_test_int(NAMESPACE::vector<int> &test);
+void	rbegin_test(NAMESPACE::vector<int> test);
+void	rbegin_string_test(NAMESPACE::vector<std::string> test);
+void	rend_test_int(NAMESPACE::vector<int> &test);
 
 int	main(void)
 {
@@ -25,22 +25,22 @@ int	main(void)
 	double start = 1.0e6 * exec_time.tv_sec + exec_time.tv_usec;
 
 	{
-		std::cout << "<int> begin test ->\n\n";
+		std::cout << "<int> rbegin test ->\n\n";
 		NAMESPACE::vector<int> vec;
-		begin_test(vec);
-		std::cout << "<- End <int> begin test\n";
+		rbegin_test(vec);
+		std::cout << "<- End <int> rbegin test\n";
 	}
 	
 	{
-		std::cout << "<std::string> begin test ->\n\n";
+		std::cout << "<std::string> rbegin test ->\n\n";
 		NAMESPACE::vector<std::string> vec;
-		begin_string_test(vec);
-		std::cout << "<- End <std::string> begin test\n";
+		rbegin_string_test(vec);
+		std::cout << "<- End <std::string> rbegin test\n";
 	}
 
 	{
 		NAMESPACE::vector<int> vec;
-		end_test_int(vec);
+		rend_test_int(vec);
 	}
 
 	gettimeofday(&exec_time, NULL);
@@ -50,72 +50,72 @@ int	main(void)
 	return (0);
 }
 
-void	begin_test(NAMESPACE::vector<int> test)
+void	rbegin_test(NAMESPACE::vector<int> test)
 {
 	test.push_back(6);
-	std::cout << *test.begin() << std::endl;
+	std::cout << *test.rbegin() << std::endl;
 	test.clear();
 
 	test.push_back(9);
 	test.push_back(42);
-	std::cout << *test.begin() << std::endl;
+	std::cout << *test.rbegin() << std::endl;
 	test.clear();
 	
 	test.push_back(-42);
 	test.push_back(42);
 	test.push_back(92);
 	test.push_back(43);
-	std::cout << *test.begin() << std::endl;
+	std::cout << *test.rbegin() << std::endl;
 	test.clear();
 
 	test.push_back(-42);
 	test.push_back(42);
 	test.push_back(92);
 	test.push_back(43);
-	std::cout << *(++test.begin()) << std::endl;
+	std::cout << *(++test.rbegin()) << std::endl;
 	test.clear();
 
 	test.push_back(-42);
 	test.push_back(42);
 	test.push_back(92);
 	test.push_back(43);
-	std::cout << *(test.begin() + 2) << std::endl;
+	std::cout << *(test.rbegin() + 2) << std::endl;
 
-	std::cout << *test.begin() << std::endl;
+	std::cout << *test.rbegin() << std::endl;
 }
 
-void	begin_string_test(NAMESPACE::vector<std::string> test)
+void	rbegin_string_test(NAMESPACE::vector<std::string> test)
 {
 	test.push_back("Hello world!");
-	std::cout << *test.begin() << std::endl;
+	std::cout << *test.rbegin() << std::endl;
 	test.clear();
 
 	test.push_back("Is it just me?");
 	test.push_back("42");
-	std::cout << *test.begin() << std::endl;
+	std::cout << *test.rbegin() << std::endl;
 	test.clear();
 	
 	test.push_back("-42");
 	test.push_back("I'm totally just venting");
 	test.push_back("on all my test cases lol");
 	test.push_back("Imagine a world were everything was perfect");
-	std::cout << *test.begin() << std::endl;
+	std::cout << *test.rbegin() << std::endl;
 	test.clear();
 
 	test.push_back("I strive to be part of a world");
 	test.push_back("\tThat works towards perfection");
 	test.push_back("Imagine life as a squirrel");
 	test.push_back("Just looking for your nuts");
-	std::cout << *(++test.begin()) << std::endl;
+	std::cout << *(++test.rbegin()) << std::endl;
 	test.clear();
 
 	test.push_back("But you can't find them");
 	test.push_back("You've grown to fat");
 	test.push_back("On pizza");
 	test.push_back("I've said too much...");
-	std::cout << *(test.begin() + 2) << std::endl;
+	std::cout << *(test.rbegin() + 2) << std::endl;
 
-	std::cout << *test.begin() << std::endl;
+	std::cout << *test.rbegin() << std::endl;
 }
 
 void	print_size(NAMESPACE::vector<int> &test)
@@ -132,28 +132,28 @@ void	populate_vector(int num, NAMESPACE::vector<int> &test)
 		test.push_back(std::rand());
 }
 
-void	end_test_int(NAMESPACE::vector<int> &test)
+void	rend_test_int(NAMESPACE::vector<int> &test)
 {
-	std::cout << "begin = end? " << (test.begin() == test.end() ? "true" : "false") << std::endl;
+	std::cout << "rbegin = end? " << (test.rbegin() == test.rend() ? "true" : "false") << std::endl;
 	NAMESPACE::vector<int>	vec;
 	populate_vector(5, test);
 	populate_vector(32, vec);
 	std::cout << "is end? " << (*(--test.end()) == test.back() ? "true" : "false") << std::endl;
 	
-	NAMESPACE::vector<int>::iterator	it = test.end();
+	NAMESPACE::vector<int>::reverse_iterator	it = test.rend();
 	int	i = 0;
-	for (; it >= test.begin(); it--)
+	for (; it >= test.rbegin(); it--)
 		std::cout << i++ << " ";
 	std::cout << "\n";
 
-	for (; it < test.end(); it++)
+	for (; it < test.rend(); it++)
 		std::cout << --i << " ";
 	std::cout << "\n";
 
-	if (it == test.end())
-		std::cout << "Has Reached the end!\n";
+	if (it == test.rend())
+		std::cout << "Has Reached the rend!\n";
 	else
-		std::cout << "Has not reached end!\n";
+		std::cout << "Has not reached rend!\n";
 
 	int tmp = test.back();
 	test.insert(test.begin(), vec.begin(), vec.end());
@@ -163,5 +163,5 @@ void	end_test_int(NAMESPACE::vector<int> &test)
 
 	std::cout << "Clearing...\n";
 	test.clear();
-	std::cout << "begin = end? " << (test.begin() == test.end() ? "true" : "false") << std::endl;
+	std::cout << "rbegin = end? " << (test.rbegin() == test.rend() ? "true" : "false") << std::endl;
 }
