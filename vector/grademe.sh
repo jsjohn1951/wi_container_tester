@@ -16,8 +16,10 @@ printf "\n\x1B[32mCompiling vector tests "
 
 rm -rf VError.txt
 
+c++ ./timediff.cpp -o timediff
+
 array=(vector/construct.cpp vector/assign.cpp vector/at.cpp vector/back.cpp vector/begin.cpp vector/clear.cpp vector/empty.cpp \
-	vector/erase.cpp vector/front.cpp vector/insert.cpp vector/max_size.cpp vector/elem_.cpp vector/push_back.cpp \
+	vector/erase.cpp vector/front.cpp vector/insert.cpp vector/max_size.cpp vector/elem_.cpp vector/push_back.cpp vector/reserve.cpp \
 	vector/iterator.cpp)
 for str in ${array[@]}; do
 	executable=$(printf "$str" | rev | cut -c5- | rev | cut -c8-)
@@ -50,15 +52,15 @@ for str in ${array[@]}; do
 	if [ -f ./$ft -a "$stdcat" = "$ftcat" ]; then
 		printf "%-16s" ${ft:0:16}
 		printf " : [\x1B[32m ✔️ \x1B[0m] "
-		printf "  |  time diff : "
-		printf " ft \x1B[32m$fttimediff\x1B[0m "
-		printf " std \x1B[35m$stdtimediff\x1B[0m "
-		res=$(echo "$fttimediff > $stdtimediff * 20" | bc)
-		printf "time : "
+		printf " |  time diff : "
+		printf " ft \x1B[32m%-5s\x1B[0m /" ${fttimediff:0:5}
+		printf " std \x1B[35m%-5s\x1B[0m " ${stdtimediff:0:5}
+		res=$(./timediff "$fttimediff $stdtimediff")
+		printf " time : "
 		if [ "$res" = "0" ]; then
-			printf " [\x1B[32m ✔️ \x1B[0m]\n"
+			printf "[\x1B[32m ✔️ \x1B[0m]\n"
 		else
-			printf " [\x1B[31m KO \x1B[0m]\n"
+			printf "[\x1B[31m KO \x1B[0m]\n"
 		fi
 	else
 		if [ -f ./$ft ]; then
@@ -80,11 +82,12 @@ if [ ! -s ./VError.txt ]; then
 	rm -rf ./VError.txt
 fi
 
+rm -rf timediff
+
 # (vector)
 # 		more insert tests
 # 		rbegin()
 # 		rend()
-# 		reserve()
 # 		resize()
 # 		swap()
 # 		Non members

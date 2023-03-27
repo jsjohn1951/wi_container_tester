@@ -6,7 +6,7 @@
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:58:34 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/27 11:48:51 by wismith          ###   ########.fr       */
+/*   Updated: 2023/03/27 15:08:27 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	print_vec(NAMESPACE::vector<T> &vec)
 {
 	std::cout << "Contents :\n";
 	for (size_t i = 0; i < vec.size(); i++)
-		std::cout << vec[i] << std::endl;
+		std::cout << vec[i] << " ";
+	std::cout << std::endl;
 }
 
 template <class T>

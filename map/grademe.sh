@@ -17,6 +17,8 @@ printf "\n\x1B[32mCompiling map tests "
 
 rm -rf MError.txt
 
+c++ ./timediff.cpp -o timediff
+
 array=(map/construct.cpp map/begin.cpp map/clear.cpp map/count.cpp map/empty.cpp map/end.cpp \
 	map/equal_range.cpp map/erase.cpp map/find.cpp map/get_allocator.cpp map/insert.cpp \
 	map/key_comp.cpp map/lower_bound.cpp map/elem_.cpp map/rbegin.cpp map/rend.cpp map/size.cpp \
@@ -52,15 +54,15 @@ for str in ${array[@]}; do
 	if [ -f ./$ft -a "$stdcat" = "$ftcat" ]; then
 		printf "%-16s" ${ft:0:16}
 		printf " : [\x1B[32m ✔️ \x1B[0m] "
-		printf "  |  time diff : "
-		printf " ft \x1B[32m$fttimediff\x1B[0m "
-		printf " std \x1B[35m$stdtimediff\x1B[0m "
-		res=$(echo "$fttimediff > $stdtimediff * 20" | bc)
-		printf "time : "
+		printf " |  time diff : "
+		printf " ft \x1B[32m%-5s\x1B[0m /" ${fttimediff:0:5}
+		printf " std \x1B[35m%-5s\x1B[0m " ${stdtimediff:0:5}
+		res=$(./timediff "$fttimediff $stdtimediff")
+		printf " time : "
 		if [ "$res" = "0" ]; then
-			printf " [\x1B[32m ✔️ \x1B[0m]\n"
+			printf "[\x1B[32m ✔️ \x1B[0m]\n"
 		else
-			printf " [\x1B[31m KO \x1B[0m]\n"
+			printf "[\x1B[31m KO \x1B[0m]\n"
 		fi
 	else
 		if [ -f ./$ft ]; then
@@ -81,3 +83,5 @@ done
 if [ ! -s ./MError.txt ]; then
 	rm -rf ./MError.txt
 fi
+
+rm -rf timediff
