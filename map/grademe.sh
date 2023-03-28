@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Map
-printf "\n\x1B[31m"
+printf "\n\x1B[36m"
 printf	"/---------------------------------------------------------------\ \n"
 printf  "|  exit      _______ *        _______   ________  ________      |\n"
 printf  "|  |^|  *  / ------  |       ╱       ╲╲╱        ╲╱        ╲     |\n"
@@ -45,11 +45,11 @@ for str in ${array[@]}; do
 		./$ft > ftcmp.txt
 		stdcat=$(cat stdcmp.txt | grep -v "time" | grep -v "NAMESPACE")
 		ftcat=$(cat ftcmp.txt | grep -v "time" | grep -v "NAMESPACE")
-		sleep 1
+	
 		stdtimediff=$(cat stdcmp.txt | grep -a "time" | awk '{printf $3}')
-		sleep 1
+	
 		fttimediff=$(cat ftcmp.txt | grep -a "time" | awk '{printf $3}')
-		sleep 1
+	
 		type=$(uname)
 		if [ "$type" = "Linux" ]; then
 			valgrind --leak-check=full ./$ft &> leakrep.txt

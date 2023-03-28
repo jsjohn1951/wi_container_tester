@@ -2,31 +2,30 @@
 
 # Vector
 
-printf "\x1B[31m                                         _       .  '  *   .  . ' \n"
-printf "       .-.      _______                 | |           .  * * -+-     \n"
-printf "      {}''; |==|_______D __   _____  ___| |_ ___  _ __ .    * .    '  *   \n"
-printf "      / ('        /|\    \ \ / / _ \/ __| __/ _ \| '__|  * .  ' .  .    \n"
-printf "  (  /  | []     / | \    \ V /  __/ (__| || (_) | |  *   *  .   .      \n"
-printf "   \(_)_]       /  |  \    \_/ \___|\___|\__\___/|_| '   *                   \n"
+printf "\x1B[35m"
+printf "            __________      ___                                      \n"
+printf "           -\\         \-_  /  /\ Stack like books ;)                 \n"
+printf "            \___________\\ /__/  \       _____ _             _        \n"
+printf "            \/***********\\   \   \     / ____| |           | |       \n"
+printf "           _-\***********/-\  \   \   | (___ | |_ __ _  ___| | __    \n"
+printf "          /***********\//   \  \  /    \___ \| __/ _  |/ __| |/ /    \n"
+printf "          \**********/-      \__\/     ____) | || (_| | (__|   <     \n"
+printf "                                      |_____/ \__\__,_|\___|_|\_\    \n"
 printf "\n  wi_container_tester by wismith (by 42 student for 42 students)\n\x1B[0m"
-printf "\n\tInfo : Compilation Errors can be found in VError.txt\n"
-printf "\n\x1B[32mCompiling vector tests "
+printf "\n\tInfo : Compilation Errors can be found in SError.txt\n"
+printf "\n\x1B[32mCompiling stack tests "
 
-# exit 0
-
-rm -rf VError.txt
+rm -rf SError.txt
 
 c++ ./timediff.cpp -o timediff
 
-array=(vector/construct.cpp vector/assign.cpp vector/at.cpp vector/back.cpp vector/begin.cpp vector/clear.cpp vector/empty.cpp \
-	vector/erase.cpp vector/front.cpp vector/insert.cpp vector/max_size.cpp vector/elem_.cpp vector/push_back.cpp vector/reserve.cpp \
-	vector/iterator.cpp vector/rbegin.cpp vector/resize.cpp vector/swap.cpp vector/relational_op.cpp)
+array=(stack/construct.cpp stack/empty.cpp stack/pop.cpp stack/push.cpp)
 for str in ${array[@]}; do
-	executable=$(printf "$str" | rev | cut -c5- | rev | cut -c8-)
+	executable=$(printf "$str" | rev | cut -c5- | rev | cut -c7-)
 	std=$executable"_std"
 	ft=$executable"_ft"
 	c++ -Wall -Werror -Wextra -std=c++98 $str -o $std
-	c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft $str -o $ft 2>> VError.txt
+	c++ -Wall -Werror -Wextra -std=c++98 -D NAMESPACE=ft $str -o $ft 2>> SError.txt
 	printf " . "
 done
 
@@ -35,7 +34,7 @@ printf "\x1B[0m\n"
 
 for str in ${array[@]}; do
 
-	executable=$(printf "$str" | rev | cut -c5- | rev | cut -c8-)
+	executable=$(printf "$str" | rev | cut -c5- | rev | cut -c7-)
 	std=$executable"_std"
 	ft=$executable"_ft"
 	if [ -f ./$ft ]; then
@@ -43,11 +42,11 @@ for str in ${array[@]}; do
 		./$ft > ftcmp.txt
 		stdcat=$(cat stdcmp.txt | grep -v "time" | grep -v "NAMESPACE")
 		ftcat=$(cat ftcmp.txt | grep -v "time" | grep -v "NAMESPACE")
-		
+	
 		stdtimediff=$(cat stdcmp.txt | grep -a "time" | awk '{printf $3}')
-		
+	
 		fttimediff=$(cat ftcmp.txt | grep -a "time" | awk '{printf $3}')
-		
+	
 		type=$(uname)
 		if [ "$type" = "Linux" ]; then
 			valgrind --leak-check=full ./$ft &> leakrep.txt
@@ -103,13 +102,10 @@ for str in ${array[@]}; do
 	rm -rf stdcmp.txt
 done
 
-if [ ! -s ./VError.txt ]; then
-	rm -rf ./VError.txt
+if [ ! -s ./SError.txt ]; then
+	rm -rf ./SError.txt
 fi
 
 rm -rf leakrep.txt
 
 rm -rf timediff
-
-# (vector)
-# 		more insert tests
