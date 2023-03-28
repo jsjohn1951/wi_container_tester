@@ -6,7 +6,7 @@
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:58:34 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/27 15:08:27 by wismith          ###   ########.fr       */
+/*   Updated: 2023/03/28 13:26:42 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,18 @@ void	comprehensive_pop(NAMESPACE::vector<T>	&test)
 
 	test.assign(5, T());
 	poper(test);
+}
+
+template <class T>
+void	relational_test(NAMESPACE::vector<T> &vec, NAMESPACE::vector<T> &vec2)
+{
+	std::cout << "Relational check :\n";
+	std::cout << "vec1 == vec2 ? " << (vec == vec2 ? "true" : "false") << std::endl;
+	std::cout << "vec1 != vec2 ? " << (vec != vec2 ? "true" : "false") << std::endl;
+	std::cout << "vec1 > vec2 ? " << (vec > vec2 ? "true" : "false") << std::endl;
+	std::cout << "vec1 < vec2 ? " << (vec < vec2 ? "true" : "false") << std::endl;
+	std::cout << "vec1 >= vec2 ? " << (vec >= vec2 ? "true" : "false") << std::endl;
+	std::cout << "vec1 <= vec2 ? " << (vec <= vec2 ? "true" : "false") << std::endl;
 }
 
 #endif

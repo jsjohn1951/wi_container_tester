@@ -20,7 +20,7 @@ c++ ./timediff.cpp -o timediff
 
 array=(vector/construct.cpp vector/assign.cpp vector/at.cpp vector/back.cpp vector/begin.cpp vector/clear.cpp vector/empty.cpp \
 	vector/erase.cpp vector/front.cpp vector/insert.cpp vector/max_size.cpp vector/elem_.cpp vector/push_back.cpp vector/reserve.cpp \
-	vector/iterator.cpp vector/rbegin.cpp)
+	vector/iterator.cpp vector/rbegin.cpp vector/resize.cpp vector/swap.cpp vector/relational_op.cpp)
 for str in ${array[@]}; do
 	executable=$(printf "$str" | rev | cut -c5- | rev | cut -c8-)
 	std=$executable"_std"
@@ -113,6 +113,4 @@ rm -rf timediff
 
 # (vector)
 # 		more insert tests
-# 		resize()
-# 		swap()
 # 		Non members
