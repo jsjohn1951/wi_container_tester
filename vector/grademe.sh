@@ -51,6 +51,7 @@ for str in ${array[@]}; do
 		type=$(uname)
 		if [ "$type" = "Linux" ]; then
 			valgrind --leak-check=full ./$ft &> leakrep.txt
+			err=$(cat leakrep.txt | grep -a "ERROR SUMMARY:" | awk '{printf $4}')
 			val=$(cat leakrep.txt | grep -a "LEAK SUMMARY" \
 				| awk '{printf $2}' && printf " " && cat leakrep.txt | grep -a "LEAK SUMMARY" | awk '{printf $3}')
 		fi
@@ -73,9 +74,15 @@ for str in ${array[@]}; do
 		if [ "$type" = "Linux" ]; then
 			printf "  |  leaks : "
 			if [ "$val" = "LEAK SUMMARY:" ]; then
-				printf "[\x1B[31m KO \x1B[0m]\n"
+				printf "[\x1B[31m KO \x1B[0m]"
 			else
+				printf "[\x1B[32m ✔️ \x1B[0m]"
+			fi
+			printf "  |  Error Summary : "
+			if [ "$err" = "0" ]; then
 				printf "[\x1B[32m ✔️ \x1B[0m]\n"
+			else
+				printf "[\x1B[31m KO \x1B[0m]\n"
 			fi
 		else
 			printf "\n"
