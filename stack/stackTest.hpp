@@ -6,7 +6,7 @@
 /*   By: wismith <wismith@42ABUDHABI.AE>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:50:03 by wismith           #+#    #+#             */
-/*   Updated: 2023/03/28 16:38:21 by wismith          ###   ########.fr       */
+/*   Updated: 2023/03/28 21:33:34 by wismith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,17 @@ void	stack_push_(NAMESPACE::stack<int, C> &stack, int num)
 {
 	for (int i = 0; i < num; i++)
 		stack.push((i * 5) / 2);
+}
+
+template <class T, class C>
+void	relational_test(NAMESPACE::stack<T, C> &s1, NAMESPACE::stack<T, C> &s2)
+{
+	std::cout << "s1 == s2 ? " << (s1 == s2 ? "true" : "false") << std::endl;
+	std::cout << "s1 != s2 ? " << (s1 != s2 ? "true" : "false") << std::endl;
+	std::cout << "s1 >= s2 ? " << (s1 >= s2 ? "true" : "false") << std::endl;
+	std::cout << "s1 <= s2 ? " << (s1 <= s2 ? "true" : "false") << std::endl;
+	std::cout << "s1 > s2 ? " << (s1 > s2 ? "true" : "false") << std::endl;
+	std::cout << "s1 < s2 ? " << (s1 < s2 ? "true" : "false") << std::endl;
 }
 
 #endif

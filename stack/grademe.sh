@@ -19,7 +19,7 @@ rm -rf SError.txt
 
 c++ ./timediff.cpp -o timediff
 
-array=(stack/construct.cpp stack/empty.cpp stack/pop.cpp stack/push.cpp)
+array=(stack/construct.cpp stack/empty.cpp stack/pop.cpp stack/push.cpp stack/size.cpp stack/top.cpp stack/relational_op.cpp)
 for str in ${array[@]}; do
 	executable=$(printf "$str" | rev | cut -c5- | rev | cut -c7-)
 	std=$executable"_std"
